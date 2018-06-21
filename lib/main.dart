@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RandomWordsState extends State<StatefulWidget> {
+class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
   final _saved = new Set<WordPair>();
@@ -99,19 +99,16 @@ class RandomWords extends StatefulWidget {
   }
 }
 
-class SavedWordsState extends State<StatefulWidget> {
-  final Set<WordPair> _saved;
+class SavedWordsState extends State<SavedWords> {
   final _biggerFont = const TextStyle(fontSize: 18.0);
-
-  SavedWordsState(this._saved);
 
   @override
   Widget build(BuildContext context) {
-    final tiles = _saved.map(
+    final tiles = widget.saved.map(
       (pair) {
         void onPressedDelete() {
           setState(() {
-            _saved.remove(pair);
+            widget.saved.remove(pair);
           });
         }
 
@@ -149,12 +146,12 @@ class SavedWordsState extends State<StatefulWidget> {
 }
 
 class SavedWords extends StatefulWidget {
-  final Set<WordPair> _saved;
+  final Set<WordPair> saved;
 
-  SavedWords(this._saved);
+  SavedWords(this.saved);
 
   @override
   State<StatefulWidget> createState() {
-    return new SavedWordsState(_saved);
+    return new SavedWordsState();
   }
 }
